@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🧬 Linkvertise Bypasser</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0e17;
+            color: #c8d6e5;
+            font-family: 'Segoe UI', -apple-system, 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(17, 25, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #00d4ff;
+            letter-spacing: 1px;
+        }
+
+        .header .sub {
+            color: #4a5a6a;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 16px;
+            border: 1px solid #ff6b6b44;
+            border-radius: 20px;
+            color: #ff6b6b;
+            font-size: 11px;
+            background: rgba(255, 107, 107, 0.05);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            color: #4a5a6a;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(13, 21, 32, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: #c8d6e5;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+        }
+
+        .input-group input::placeholder {
+            color: #2a3a4a;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #00d4ff;
+            color: #0a0e17;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Segoe UI', monospace;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #00b8d4;
+            transform: scale(1.01);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .output-area {
+            margin-top: 20px;
+            padding: 16px 18px;
+            background: rgba(13, 21, 32, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            min-height: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+            color: #c8d6e5;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .output-area .success {
+            color: #00ff88;
+        }
+
+        .output-area .error {
+            color: #ff6b6b;
+        }
+
+        .output-area .info {
+            color: #4a5a6a;
+        }
+
+        .footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 11px;
+            color: #2a3a4a;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 16px;
+        }
+
+        .footer .disclaimer {
+            color: #ff6b6b;
+            font-size: 11px;
+            margin-top: 6px;
+        }
+
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 24px 16px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🧬 Bypass</h1>
+            <div class="sub">Linkvertise · Adfly · Shorte.st · ja muut</div>
+            <div class="badge">⚠️ Vain luvalliseen käyttöön · Oma vastuu</div>
+        </div>
+
+        <div class="input-group">
+            <label for="linkInput">🔗 Liitä Linkvertise- tai muu lyhennetty linkki</label>
+            <input
+            id="linkInput"
+            type="url"
+            placeholder="https://linkvertise.com/..."
+            value="https://linkvertise.com/"
+            >
+        </div>
+
+        <button class="btn" id="bypassBtn">⚡ Bypass</button>
+
+        <div class="output-area" id="output">
+            <span class="info">💡 Liitä linkki ja paina Bypass.</span>
+        </div>
+
+        <div class="footer">
+            <div>⚡ <a href="#" target="_blank">inftools</a> · Bypass Suite</div>
+            <div class="disclaimer">
+                ⚠️ Vain koulutus- ja testikäyttöön. Tekijä ei ole vastuussa väärinkäytöistä.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const input = document.getElementById('linkInput');
+            const btn = document.getElementById('bypassBtn');
+            const output = document.getElementById('output');
+
+            // API-rajapinta (sama kuin bypass.vip): https://api.bypass.vip/
+            const API_URL = 'https://api.bypass.vip/';
+
+            function setOutput(text, type) {
+                const className = type || 'info';
+                output.innerHTML = `<span class="${className}">${escapeHtml(text)}</span>`;
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            async function bypassLink(url) {
+                if (!url || !url.trim()) {
+                    setOutput('❌ Anna linkki.', 'error');
+                    return;
+                }
+
+                const cleanUrl = url.trim();
+
+                // Yksinkertainen validointi
+                if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+                    setOutput('❌ Virheellinen URL. Aloita http:// tai https://', 'error');
+                    return;
+                }
+
+                setOutput('⏳ Bypass käynnissä...', 'info');
+                btn.disabled = true;
+
+                try {
+                    const payload = new URLSearchParams();
+                    payload.append('url', cleanUrl);
+
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: payload.toString(),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+
+                    // bypass.vip API palauttaa destination-kentän
+                    if (data && data.destination) {
+                        setOutput(
+                            `✅ Bypass onnistui!\n\n🔗 Alkuperäinen: ${cleanUrl}\n🎯 Kohde: ${data.destination}`,
+                            'success'
+                        );
+                    } else if (data && data.error) {
+                        setOutput(`❌ Virhe: ${data.error}`, 'error');
+                    } else {
+                        // Yritetään tulkita data sellaisenaan
+                        const jsonStr = JSON.stringify(data, null, 2);
+                        if (jsonStr && jsonStr.length > 2) {
+                            setOutput(`⚠️ Tuntematon vastaus:\n${jsonStr}`, 'error');
+                        } else {
+                            setOutput('❌ Bypass epäonnistui. Tarkista linkki.', 'error');
+                        }
+                    }
+                } catch (error) {
+                    setOutput(`❌ Virhe: ${error.message}`, 'error');
+                } finally {
+                    btn.disabled = false;
+                }
+            }
+
+            // Tapahtumakuuntelijat
+            btn.addEventListener('click', function() {
+                bypassLink(input.value);
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    bypassLink(input.value);
+                }
+            });
+
+            // Alustus: jos kentässä on jotain, sitä ei ajeta automaattisesti
+            setOutput('💡 Liitä linkki ja paina Bypass.', 'info');
+        })();
+    </script>
+
+</body>
+</html>
