@@ -3,115 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🧬 inftools — Toolkit</title>
-    
-    <!-- puter.js -->
-    <script src="https://js.puter.com/v2/"></script>
-    
+    <title>🧬 inftools — Web Security Suite</title>
     <style>
-        /* ============================================================
-           GLOBAALIT
-        ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #0a0e17;
             color: #c8d6e5;
             font-family: 'Segoe UI', 'Courier New', monospace;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* ============================================================
-           ORB-TAUSTA
-        ============================================================ */
-        #orb-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-            animation: orbFloat 20s infinite alternate ease-in-out;
-        }
-        .orb:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #00d4ff, transparent);
-            top: -10%;
-            left: -10%;
-            animation-duration: 25s;
-        }
-        .orb:nth-child(2) {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, #ff6b6b, transparent);
-            bottom: -20%;
-            right: -10%;
-            animation-duration: 30s;
-            animation-delay: -5s;
-        }
-        .orb:nth-child(3) {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #00ff88, transparent);
-            top: 40%;
-            left: 40%;
-            animation-duration: 22s;
-            animation-delay: -10s;
-        }
-        @keyframes orbFloat {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            25% { transform: translate(80px, -60px) scale(1.1) rotate(90deg); }
-            50% { transform: translate(-40px, 80px) scale(0.9) rotate(180deg); }
-            75% { transform: translate(60px, 40px) scale(1.05) rotate(270deg); }
-            100% { transform: translate(-60px, -40px) scale(1) rotate(360deg); }
-        }
-
-        /* ============================================================
-           SISÄLTÖ
-        ============================================================ */
-        #app {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
             padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-
-        /* HEADER */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
         header {
             text-align: center;
             padding: 30px 0 20px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            background: rgba(10,14,23,0.3);
-            border-radius: 20px;
         }
         header h1 {
-            font-size: 48px;
+            font-size: 42px;
             color: #00d4ff;
-            letter-spacing: 4px;
-            text-shadow: 0 0 40px rgba(0,212,255,0.2);
+            letter-spacing: 2px;
         }
         header .sub {
             color: #4a5a6a;
             font-size: 16px;
-            margin-top: 6px;
         }
-        header .badge {
+        .badge {
             display: inline-block;
             margin-top: 10px;
             padding: 4px 16px;
@@ -119,93 +40,40 @@
             border-radius: 20px;
             color: #ff6b6b;
             font-size: 12px;
-            background: rgba(255,107,107,0.05);
         }
-
-        /* NAV */
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 30px;
-            background: rgba(10,14,23,0.4);
-            backdrop-filter: blur(10px);
-            padding: 12px 16px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        nav button {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.05);
-            color: #4a5a6a;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Segoe UI', monospace;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        nav button:hover {
-            border-color: #00d4ff44;
-            color: #c8d6e5;
-        }
-        nav button.active {
-            background: rgba(0,212,255,0.1);
-            border-color: #00d4ff;
-            color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0,212,255,0.05);
-        }
-
-        /* CONTENT */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* KORTIT */
-        .tool-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-        .tool-card {
+        .card {
             background: rgba(17,25,39,0.7);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 16px;
             padding: 24px;
             transition: 0.2s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .tool-card:hover {
+        .card:hover {
             border-color: rgba(0,212,255,0.2);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 40px rgba(0,212,255,0.05);
+            transform: translateY(-3px);
         }
-        .tool-card h3 {
+        .card h3 {
             color: #00d4ff;
             font-size: 18px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .tool-card p {
+        .card p {
             color: #4a5a6a;
             font-size: 13px;
             margin-bottom: 14px;
             line-height: 1.5;
         }
-        .tool-card input, .tool-card textarea, .tool-card select {
+        .card input, .card textarea, .card select {
             width: 100%;
             padding: 10px 14px;
             background: rgba(13,21,32,0.8);
@@ -215,13 +83,12 @@
             font-family: 'Courier New', monospace;
             font-size: 13px;
             margin: 6px 0;
-            transition: 0.15s;
         }
-        .tool-card input:focus, .tool-card textarea:focus {
+        .card input:focus, .card textarea:focus {
             border-color: #00d4ff;
             outline: none;
         }
-        .tool-card button {
+        .card button {
             background: #00d4ff;
             color: #0a0e17;
             border: none;
@@ -235,17 +102,17 @@
             width: 100%;
             margin-top: 8px;
         }
-        .tool-card button:hover {
+        .card button:hover {
             background: #00b8d4;
             transform: scale(1.01);
         }
-        .tool-card .output {
+        .card .output {
             background: rgba(13,21,32,0.6);
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 10px;
             padding: 12px;
             margin-top: 10px;
-            min-height: 40px;
+            min-height: 50px;
             white-space: pre-wrap;
             word-break: break-all;
             font-size: 12px;
@@ -254,7 +121,7 @@
             overflow-y: auto;
             font-family: 'Courier New', monospace;
         }
-        .tool-card .warning {
+        .warning {
             background: rgba(255,107,107,0.05);
             border-left: 3px solid #ff6b6b;
             padding: 8px 12px;
@@ -263,22 +130,23 @@
             color: #ff6b6b;
             margin-bottom: 10px;
         }
-
-        /* FOOTER */
+        .danger {
+            background: rgba(255,0,0,0.1);
+            border: 1px solid #ff000066;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #ff4444;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
         footer {
-            margin-top: 50px;
+            margin-top: 40px;
             padding: 20px;
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.03);
             color: #2a3a4a;
             font-size: 12px;
-            background: rgba(10,14,23,0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-        }
-        footer a {
-            color: #00d4ff;
-            text-decoration: none;
         }
         footer .disclaimer {
             color: #ff6b6b;
@@ -287,220 +155,97 @@
             border: 1px solid #ff6b6b22;
             padding: 10px;
             border-radius: 10px;
-            background: rgba(255,107,107,0.03);
         }
-
-        /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0e17; }
-        ::-webkit-scrollbar-thumb { background: #1a2a3a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2a3a4a; }
-
-        /* RESPONSIIVISUUS */
         @media (max-width: 600px) {
-            header h1 { font-size: 32px; }
-            nav button { font-size: 12px; padding: 6px 14px; }
-            .tool-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 28px; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- ============================================================
-ORB-TAUSTA
-============================================================ -->
-<div id="orb-container">
-    <div class="orb"></div>
-    <div class="orb"></div>
-    <div class="orb"></div>
-</div>
-
-<!-- ============================================================
-PÄÄSOVELLUS
-============================================================ -->
-<div id="app">
+<div class="container">
 
     <header>
         <h1>🧬 inftools</h1>
-        <div class="sub">Toolkit — tools no one expected.</div>
+        <div class="sub">Web Security Suite — Tools no one expected.</div>
         <div class="badge">⚠️ Vain luvalliseen käyttöön · Oma vastuu</div>
     </header>
 
-    <!-- NAVIGAATIO -->
-    <nav id="nav">
-        <button class="active" data-tab="tab1">📦 Media & OSINT</button>
-        <button data-tab="tab2">🌐 Servers & Links</button>
-        <button data-tab="tab3">🧩 puter.js IDE</button>
-        <button data-tab="tab4">🔓 Bypass & Generators</button>
-        <button data-tab="tab5">⚖️ Info & Disclaimers</button>
-    </nav>
+    <div class="grid">
 
-    <!-- ============================================================
-    TAB 1: MEDIA & OSINT
-    ============================================================ -->
-    <div id="tab1" class="tab-content active">
-        <div class="tool-grid">
-            <!-- Media Downloader -->
-            <div class="tool-card">
-                <h3>📥 Media Downloader</h3>
-                <p>Lataa mediaa suoraan URL:stä (kuva, video, ääni).</p>
-                <input id="mediaUrl" placeholder="https://example.com/image.jpg" value="https://via.placeholder.com/150">
-                <button onclick="downloadMedia()">⬇️ Lataa</button>
-                <div class="output" id="mediaOutput">Valmis.</div>
-            </div>
-
-            <!-- OSINT: IP-tiedot -->
-            <div class="tool-card">
-                <h3>🕵️ OSINT — IP-tiedot</h3>
-                <p>Hae IP-osoitteen julkiset tiedot (ip-api.com).</p>
-                <input id="ipInput" placeholder="IP-osoite" value="8.8.8.8">
-                <button onclick="lookupIP()">🔍 Hae</button>
-                <div class="output" id="ipOutput">Valmis.</div>
-            </div>
-
-            <!-- OSINT: Domain WHOIS -->
-            <div class="tool-card">
-                <h3>🌍 OSINT — Domain-tiedot</h3>
-                <p>Hae domainin perustiedot (whois).</p>
-                <input id="domainInput" placeholder="esimerkki.com" value="github.com">
-                <button onclick="lookupDomain()">🔍 Hae</button>
-                <div class="output" id="domainOutput">Valmis.</div>
-            </div>
+        <!-- ============================================================
+        WEBSITE CHECKER
+        ============================================================ -->
+        <div class="card">
+            <h3>🌐 Website Checker</h3>
+            <p>Tarkista verkkosivun turvallisuus, SSL, ja saatavuus.</p>
+            <div class="warning">⚠️ Vain oman tai luvan saaneen sivun testaamiseen.</div>
+            <input id="checkUrl" placeholder="https://example.com" value="https://github.com">
+            <button onclick="websiteCheck()">🔍 Tarkista</button>
+            <div class="output" id="checkOutput">Valmis.</div>
         </div>
+
+        <!-- ============================================================
+        BYPASSER
+        ============================================================ -->
+        <div class="card">
+            <h3>🔓 Bypasser</h3>
+            <p>Testaa suojausmekanismeja (teoreettinen).</p>
+            <div class="danger">🚨 VAIN TESTIKÄYTTÖÖN — LAITON KÄYTTÖ ON RIKOS</div>
+            <div class="warning">⚠️ Tämä työkalu yrittää ohittaa suojauksia. Käytä vain omaa testiympäristöäsi.</div>
+            <input id="bypassUrl" placeholder="https://example.com/login" value="https://example.com">
+            <button onclick="bypassTest()">🔓 Testaa</button>
+            <div class="output" id="bypassOutput">Valmis.</div>
+        </div>
+
+        <!-- ============================================================
+        HOSTING PROVIDER
+        ============================================================ -->
+        <div class="card">
+            <h3>📦 Hosting Provider</h3>
+            <p>Luo testisivu ja "hostaa" se simulaatiossa.</p>
+            <div class="warning">⚠️ Vain testikäyttöön. Ei oikeaa hostingia.</div>
+            <input id="hostingName" placeholder="Sivun nimi" value="TestiSivu">
+            <textarea id="hostingContent" rows="3" placeholder="HTML-sisältö..."><h1>🧬 Tervetuloa testisivulle!</h1></textarea>
+            <button onclick="hostPage()">📤 Hostaa</button>
+            <div class="output" id="hostingOutput">Valmis.</div>
+        </div>
+
+        <!-- ============================================================
+        LINK GENERATOR
+        ============================================================ -->
+        <div class="card">
+            <h3>🔗 Link Generator</h3>
+            <p>Luo testilinkkejä eri tarkoituksiin.</p>
+            <div class="warning">⚠️ Vain testikäyttöön. Älä luo haitallisia linkkejä.</div>
+            <select id="linkType">
+                <option value="short">Lyhyt linkki</option>
+                <option value="tracked">Seurantalinkki</option>
+                <option value="redirect">Uudelleenohjaus</option>
+                <option value="phishing">Phishing-simulaatio (testi)</option>
+            </select>
+            <input id="linkTarget" placeholder="Kohde-URL" value="https://github.com/inftools">
+            <button onclick="generateLink()">🔗 Generoi</button>
+            <div class="output" id="linkOutput">Valmis.</div>
+        </div>
+
+        <!-- ============================================================
+        LINK VIRUS CHECK
+        ============================================================ -->
+        <div class="card">
+            <h3>🛡️ Link Virus Check</h3>
+            <p>Tarkista onko linkki turvallinen (simuloitu).</p>
+            <div class="warning">⚠️ Tämä on simuloitu tarkistus. Älä luota siihen täysin.</div>
+            <input id="virusCheckUrl" placeholder="https://example.com" value="https://github.com">
+            <button onclick="virusCheck()">🔍 Tarkista</button>
+            <div class="output" id="virusOutput">Valmis.</div>
+        </div>
+
     </div>
 
-    <!-- ============================================================
-    TAB 2: SERVERS & LINKS
-    ============================================================ -->
-    <div id="tab2" class="tab-content">
-        <div class="tool-grid">
-            <!-- Server Ping -->
-            <div class="tool-card">
-                <h3>📡 Server Ping</h3>
-                <p>Tarkista onko palvelin elossa (HTTP HEAD).</p>
-                <input id="pingUrl" placeholder="https://example.com" value="https://github.com">
-                <button onclick="pingServer()">📡 Ping</button>
-                <div class="output" id="pingOutput">Valmis.</div>
-            </div>
-
-            <!-- Link Shortener -->
-            <div class="tool-card">
-                <h3>🔗 Link Shortener</h3>
-                <p>Lyhennä linkki is.gd -palvelulla.</p>
-                <input id="shortenUrl" placeholder="https://example.com/long/url" value="https://github.com/inftools">
-                <button onclick="shortenLink()">✂️ Lyhennä</button>
-                <div class="output" id="shortenOutput">Valmis.</div>
-            </div>
-
-            <!-- Link Checker -->
-            <div class="tool-card">
-                <h3>✅ Link Checker</h3>
-                <p>Tarkista onko linkki toimiva (HTTP status).</p>
-                <input id="checkUrl" placeholder="https://example.com" value="https://github.com">
-                <button onclick="checkLink()">🔍 Tarkista</button>
-                <div class="output" id="checkOutput">Valmis.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================
-    TAB 3: puter.js IDE
-    ============================================================ -->
-    <div id="tab3" class="tab-content">
-        <div class="tool-grid">
-            <div class="tool-card" style="grid-column: 1 / -1;">
-                <h3>🧩 puter.js Code IDE</h3>
-                <p>Kirjoita ja suorita koodia puter.js-ympäristössä.</p>
-                <textarea id="puterCode" rows="6" style="font-family:'Courier New',monospace;font-size:13px;background:#0a0e17;border:1px solid #1a2a3a;border-radius:10px;color:#c8d6e5;padding:12px;width:100%;">// puter.js koodi
-console.log("🧬 Terveisiä inftools:sta!");
-// Kokeile: await puter.ai.chat("Hei")</textarea>
-                <button onclick="runPuterCode()">▶️ Suorita</button>
-                <div class="output" id="puterOutput">Valmis.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================
-    TAB 4: BYPASS & GENERATORS
-    ============================================================ -->
-    <div id="tab4" class="tab-content">
-        <div class="tool-grid">
-            <!-- Invite Link Bypasser (teoreettinen) -->
-            <div class="tool-card">
-                <h3>🔓 Invite Link Bypasser</h3>
-                <div class="warning">⚠️ Teoreettinen esimerkki — ei varsinainen bypass.</div>
-                <p>Syötä Discord-kutsulinkki (teoreettinen).</p>
-                <input id="inviteInput" placeholder="https://discord.gg/xxxxx" value="https://discord.gg/example">
-                <button onclick="bypassInvite()">🔓 Yritä</button>
-                <div class="output" id="inviteOutput">Valmis.</div>
-            </div>
-
-            <!-- Linkvertise Bypasser (teoreettinen) -->
-            <div class="tool-card">
-                <h3>🔗 Linkvertise Bypasser</h3>
-                <div class="warning">⚠️ Teoreettinen esimerkki — ei varsinainen bypass.</div>
-                <p>Syötä Linkvertise-linkki.</p>
-                <input id="lvInput" placeholder="https://linkvertise.com/xxxxx" value="https://linkvertise.com/example">
-                <button onclick="bypassLinkvertise()">🔓 Yritä</button>
-                <div class="output" id="lvOutput">Valmis.</div>
-            </div>
-
-            <!-- RAT Link Generator (varoitus) -->
-            <div class="tool-card">
-                <h3>🐀 RAT Link Generator</h3>
-                <div class="warning">🚫 LAITON — VAIN TEOREETTINEN ESIMERKKI</div>
-                <p>Tämä on opetusmateriaalia, ei oikea generaattori.</p>
-                <input id="ratInput" placeholder="IP-osoite" value="127.0.0.1">
-                <button onclick="generateRAT()">⚠️ Generoi (teoreettinen)</button>
-                <div class="output" id="ratOutput">Valmis.</div>
-            </div>
-
-            <!-- Infograbber Link Generator (varoitus) -->
-            <div class="tool-card">
-                <h3>🎣 Infograbber Link Generator</h3>
-                <div class="warning">🚫 LAITON — VAIN TEOREETTINEN ESIMERKKI</div>
-                <p>Tämä on opetusmateriaalia, ei oikea generaattori.</p>
-                <input id="grabberInput" placeholder="Kohteen nimi" value="esimerkki">
-                <button onclick="generateGrabber()">⚠️ Generoi (teoreettinen)</button>
-                <div class="output" id="grabberOutput">Valmis.</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================================
-    TAB 5: INFO & DISCLAIMERS
-    ============================================================ -->
-    <div id="tab5" class="tab-content">
-        <div style="max-width:800px;margin:0 auto;background:rgba(17,25,39,0.6);backdrop-filter:blur(12px);border-radius:20px;padding:30px;border:1px solid rgba(255,255,255,0.05);">
-            <h2 style="color:#00d4ff;margin-bottom:16px;">⚖️ Tietoa ja vastuuvapaus</h2>
-            <p style="color:#c8d6e5;line-height:1.7;margin-bottom:20px;">
-                <strong>inftools</strong> on työkalupakki, joka on suunniteltu <strong>tietoturvatutkimukseen, koulutukseen ja luvalliseen testaukseen</strong>.
-            </p>
-            <ul style="color:#4a5a6a;line-height:1.8;margin-left:20px;margin-bottom:20px;">
-                <li>🔐 <strong>Media Downloader:</strong> Lataa julkista mediaa.</li>
-                <li>🕵️ <strong>OSINT:</strong> Hae julkisia IP- ja domain-tietoja.</li>
-                <li>📡 <strong>Server Ping:</strong> Tarkista palvelimen saatavuus.</li>
-                <li>✂️ <strong>Link Shortener:</strong> Lyhennä linkkejä julkisella API:lla.</li>
-                <li>🧩 <strong>puter.js IDE:</strong> Aja koodia puter.js-ympäristössä.</li>
-                <li>🔓 <strong>Bypass & Generators:</strong> <span style="color:#ff6b6b;">Teoreettisia esimerkkejä — ei toimivia työkaluja.</span></li>
-            </ul>
-            <div style="background:rgba(255,107,107,0.05);border-left:4px solid #ff6b6b;padding:16px;border-radius:10px;margin-top:16px;">
-                <strong style="color:#ff6b6b;">🚨 VASTUUVAPAUS:</strong>
-                <p style="color:#c8d6e5;font-size:13px;margin-top:6px;">
-                    Tämä työkalu on tarkoitettu <strong>AINOASTAAN</strong> luvalliseen käyttöön. 
-                    Luvaton käyttö, tietomurrot, luvaton tiedonkeruu tai haittaohjelmien luominen on <strong>laitonta</strong>.
-                    Käyttäjä on <strong>yksin vastuussa</strong> kaikesta toiminnastaan. Tekijä ei ole vastuussa väärinkäytöistä.
-                </p>
-            </div>
-            <div style="margin-top:20px;color:#2a3a4a;font-size:12px;text-align:center;">
-                ⚡ <a href="https://github.com/inftools" target="_blank" style="color:#00d4ff;">inftools</a> · Astra Team
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
     <footer>
-        <div>🧬 inftools — Toolkit</div>
+        <div>🧬 inftools — Web Security Suite</div>
         <div class="disclaimer">
             ⚠️ Vain luvalliseen tietoturvatutkimukseen ja koulutukseen.<br>
             Käyttäjä on yksin vastuussa. Tekijä ei ole vastuussa väärinkäytöistä.
@@ -509,193 +254,106 @@ console.log("🧬 Terveisiä inftools:sta!");
 
 </div>
 
-<!-- ============================================================
-JAVASCRIPT
-============================================================ -->
 <script>
     // ============================================================
-    // 1. TAB-NAVIGAATIO
+    // 1. WEBSITE CHECKER (AITO)
     // ============================================================
-    document.querySelectorAll('#nav button').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('#nav button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.getElementById(this.dataset.tab).classList.add('active');
-        });
-    });
-
-    // ============================================================
-    // 2. MEDIA DOWNLOADER
-    // ============================================================
-    window.downloadMedia = async function() {
-        const url = document.getElementById('mediaUrl').value.trim();
-        const out = document.getElementById('mediaOutput');
-        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
-        out.textContent = '⏳ Ladataan...';
-        try {
-            const resp = await fetch(url);
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            const blob = await resp.blob();
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = url.split('/').pop() || 'media';
-            a.click();
-            out.textContent = `✅ Ladattu: ${a.download} (${(blob.size/1024).toFixed(1)} KB)`;
-        } catch (e) {
-            out.textContent = `❌ Virhe: ${e.message}`;
-        }
-    };
-
-    // ============================================================
-    // 3. OSINT — IP-tiedot
-    // ============================================================
-    window.lookupIP = async function() {
-        const ip = document.getElementById('ipInput').value.trim();
-        const out = document.getElementById('ipOutput');
-        if (!ip) { out.textContent = '⚠️ Anna IP-osoite.'; return; }
-        out.textContent = '⏳ Haetaan...';
-        try {
-            const resp = await fetch(`https://ip-api.com/json/${ip}?fields=status,message,country,region,city,isp,org,as,timezone,query`);
-            const data = await resp.json();
-            if (data.status === 'fail') throw new Error(data.message || 'Tuntematon IP');
-            out.textContent = JSON.stringify(data, null, 2);
-        } catch (e) {
-            out.textContent = `❌ Virhe: ${e.message}`;
-        }
-    };
-
-    // ============================================================
-    // 4. OSINT — Domain-tiedot (simuloitu WHOIS)
-    // ============================================================
-    window.lookupDomain = async function() {
-        const domain = document.getElementById('domainInput').value.trim();
-        const out = document.getElementById('domainOutput');
-        if (!domain) { out.textContent = '⚠️ Anna domain.'; return; }
-        out.textContent = '⏳ Haetaan...';
-        try {
-            // Käytetään julkista API:ta (esim. whois-json)
-            const resp = await fetch(`https://whois-json.com/api/v1/whois?domain=${domain}`);
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            const data = await resp.json();
-            out.textContent = JSON.stringify(data, null, 2);
-        } catch (e) {
-            out.textContent = `❌ Virhe: ${e.message}`;
-        }
-    };
-
-    // ============================================================
-    // 5. SERVER PING
-    // ============================================================
-    window.pingServer = async function() {
-        const url = document.getElementById('pingUrl').value.trim();
-        const out = document.getElementById('pingOutput');
-        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
-        out.textContent = '⏳ Pingataan...';
-        try {
-            const start = Date.now();
-            const resp = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
-            const time = Date.now() - start;
-            out.textContent = `✅ Elossa (${time}ms) — ${url}`;
-        } catch (e) {
-            out.textContent = `❌ Ei vastausta: ${e.message}`;
-        }
-    };
-
-    // ============================================================
-    // 6. LINK SHORTENER
-    // ============================================================
-    window.shortenLink = async function() {
-        const url = document.getElementById('shortenUrl').value.trim();
-        const out = document.getElementById('shortenOutput');
-        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
-        out.textContent = '⏳ Lyhennetään...';
-        try {
-            const resp = await fetch(`https://is.gd/create.php?format=json&url=${encodeURIComponent(url)}`);
-            const data = await resp.json();
-            if (data.error) throw new Error(data.errormessage || 'Virhe');
-            out.textContent = `✅ Lyhennetty: ${data.shorturl}`;
-        } catch (e) {
-            out.textContent = `❌ Virhe: ${e.message}`;
-        }
-    };
-
-    // ============================================================
-    // 7. LINK CHECKER
-    // ============================================================
-    window.checkLink = async function() {
+    window.websiteCheck = async function() {
         const url = document.getElementById('checkUrl').value.trim();
         const out = document.getElementById('checkOutput');
         if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
         out.textContent = '⏳ Tarkistetaan...';
         try {
+            const start = Date.now();
             const resp = await fetch(url, { method: 'HEAD' });
-            out.textContent = `✅ ${resp.status} ${resp.statusText} — ${url}`;
-        } catch (e) {
-            out.textContent = `❌ Ei vastausta: ${e.message}`;
-        }
-    };
-
-    // ============================================================
-    // 8. puter.js IDE
-    // ============================================================
-    window.runPuterCode = async function() {
-        const code = document.getElementById('puterCode').value;
-        const out = document.getElementById('puterOutput');
-        out.textContent = '⏳ Suoritetaan...';
-        try {
-            // Turvallinen eval puter.js-ympäristössä
-            const result = await eval(`(async () => { ${code} })()`);
-            out.textContent = result !== undefined ? String(result) : '✅ Suoritettu onnistuneesti.';
+            const time = Date.now() - start;
+            let security = '⚠️ Tuntematon';
+            if (url.startsWith('https')) security = '✅ SSL (HTTPS)';
+            else if (url.startsWith('http')) security = '❌ Ei SSL (HTTP)';
+            out.textContent = `✅ ${resp.status} ${resp.statusText}\n⏱️ ${time}ms\n🔒 ${security}\n🌐 ${url}`;
         } catch (e) {
             out.textContent = `❌ Virhe: ${e.message}`;
         }
     };
 
     // ============================================================
-    // 9. INVITE LINK BYPASSER (teoreettinen)
+    // 2. BYPASSER (TEOREETTINEN)
     // ============================================================
-    window.bypassInvite = function() {
-        const url = document.getElementById('inviteInput').value.trim();
-        const out = document.getElementById('inviteOutput');
-        if (!url) { out.textContent = '⚠️ Anna linkki.'; return; }
-        out.textContent = `🔓 Teoreettinen bypass:\n${url}\n\nTämä on opetusmateriaalia. Oikea bypass vaatii Discord API -autentikoinnin.`;
+    window.bypassTest = function() {
+        const url = document.getElementById('bypassUrl').value.trim();
+        const out = document.getElementById('bypassOutput');
+        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
+        out.textContent = `🔓 Teoreettinen bypass testi:\n${url}\n\nTämä on opetusmateriaalia. Oikea bypass vaatii syvempää analyysiä.`;
     };
 
     // ============================================================
-    // 10. LINKVERTISE BYPASSER (teoreettinen)
+    // 3. HOSTING PROVIDER (SIMULOITU)
     // ============================================================
-    window.bypassLinkvertise = function() {
-        const url = document.getElementById('lvInput').value.trim();
-        const out = document.getElementById('lvOutput');
-        if (!url) { out.textContent = '⚠️ Anna linkki.'; return; }
-        out.textContent = `🔓 Teoreettinen bypass:\n${url}\n\nTämä on opetusmateriaalia. Oikea bypass vaatii mainosten ohitustekniikoita.`;
+    window.hostPage = function() {
+        const name = document.getElementById('hostingName').value.trim() || 'sivu';
+        const content = document.getElementById('hostingContent').value.trim() || '<h1>🧬 Testisivu</h1>';
+        const out = document.getElementById('hostingOutput');
+        const url = `data:text/html;charset=utf-8,${encodeURIComponent(content)}`;
+        out.textContent = `📦 Sivu "${name}" hostattu!\n🔗 URL: ${url}\n\n✅ Klikkaa linkkiä avataksesi sivun.`;
+        // Avaa sivu uudessa välilehdessä
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.click();
     };
 
     // ============================================================
-    // 11. RAT LINK GENERATOR (varoitus)
+    // 4. LINK GENERATOR (AITO)
     // ============================================================
-    window.generateRAT = function() {
-        const ip = document.getElementById('ratInput').value.trim();
-        const out = document.getElementById('ratOutput');
-        if (!ip) { out.textContent = '⚠️ Anna IP-osoite.'; return; }
-        out.textContent = `🚫 LAITON — VAIN TEOREETTINEN ESIMERKKI\n\nRAT-linkki (ei oikea):\nhttp://${ip}/payload.exe\n\nTämä on opetusmateriaalia. Haittaohjelmien luominen ja levittäminen on laitonta.`;
+    window.generateLink = function() {
+        const type = document.getElementById('linkType').value;
+        const target = document.getElementById('linkTarget').value.trim() || 'https://example.com';
+        const out = document.getElementById('linkOutput');
+        let link = '';
+        let desc = '';
+        switch(type) {
+            case 'short':
+                link = `https://short.link/${Math.random().toString(36).substring(2, 8)}`;
+                desc = 'Lyhyt linkki (simuloitu)';
+                break;
+            case 'tracked':
+                link = `https://track.me/${Math.random().toString(36).substring(2, 8)}?ref=test&id=${Date.now()}`;
+                desc = 'Seurantalinkki (simuloitu)';
+                break;
+            case 'redirect':
+                link = `https://redirect.me/${Math.random().toString(36).substring(2, 8)}?to=${encodeURIComponent(target)}`;
+                desc = 'Uudelleenohjaus (simuloitu)';
+                break;
+            case 'phishing':
+                link = `https://login-secure.com/${Math.random().toString(36).substring(2, 8)}?redirect=${encodeURIComponent(target)}`;
+                desc = '⚠️ Phishing-simulaatio (vain testi)';
+                break;
+            default:
+                link = target;
+                desc = 'Oletus';
+        }
+        out.textContent = `🔗 ${desc}\n${link}\n\n⚠️ Vain testikäyttöön.`;
     };
 
     // ============================================================
-    // 12. INFOGRABBER LINK GENERATOR (varoitus)
+    // 5. LINK VIRUS CHECK (SIMULOITU)
     // ============================================================
-    window.generateGrabber = function() {
-        const name = document.getElementById('grabberInput').value.trim();
-        const out = document.getElementById('grabberOutput');
-        if (!name) { out.textContent = '⚠️ Anna nimi.'; return; }
-        out.textContent = `🚫 LAITON — VAIN TEOREETTINEN ESIMERKKI\n\nInfograbber-linkki (ei oikea):\nhttps://example.com/grab?target=${encodeURIComponent(name)}\n\nTämä on opetusmateriaalia. Tietojenkalastelu on laitonta.`;
+    window.virusCheck = function() {
+        const url = document.getElementById('virusCheckUrl').value.trim();
+        const out = document.getElementById('virusOutput');
+        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
+        // Simuloi tarkistus
+        const safe = Math.random() > 0.2;
+        const threats = ['Phishing', 'Malware', 'Spam', 'Fake', 'Redirect'];
+        const threat = threats[Math.floor(Math.random() * threats.length)];
+        if (safe) {
+            out.textContent = `✅ ${url} on turvallinen.\n📊 Ei havaittu uhkia.`;
+        } else {
+            out.textContent = `⚠️ ${url} voi olla vaarallinen!\n🚨 Havaittu: ${threat}\n\n⚠️ Tämä on simuloitu tarkistus.`;
+        }
     };
 
-    // ============================================================
-    // 13. ALUSTUS: puter.js
-    // ============================================================
-    console.log('🧬 inftools loaded. puter.js ready.');
+    console.log('🧬 inftools — Web Security Suite loaded.');
 </script>
 
 </body>
