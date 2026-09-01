@@ -3,35 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🧬 inftools — Web Security Suite</title>
+    <title>🧬 Linkvertise Bypasser</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background: #0a0e17;
             color: #c8d6e5;
-            font-family: 'Segoe UI', 'Courier New', monospace;
+            font-family: 'Segoe UI', -apple-system, 'Courier New', monospace;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
+
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
+            max-width: 700px;
+            width: 100%;
+            background: rgba(17, 25, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
-        header {
+
+        .header {
             text-align: center;
-            padding: 30px 0 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
-        header h1 {
-            font-size: 42px;
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
             color: #00d4ff;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
-        header .sub {
+
+        .header .sub {
             color: #4a5a6a;
-            font-size: 16px;
+            font-size: 14px;
+            margin-top: 4px;
         }
+
         .badge {
             display: inline-block;
             margin-top: 10px;
@@ -39,322 +58,263 @@
             border: 1px solid #ff6b6b44;
             border-radius: 20px;
             color: #ff6b6b;
-            font-size: 12px;
+            font-size: 11px;
+            background: rgba(255, 107, 107, 0.05);
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .card {
-            background: rgba(17,25,39,0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 24px;
-            transition: 0.2s;
-        }
-        .card:hover {
-            border-color: rgba(0,212,255,0.2);
-            transform: translateY(-3px);
-        }
-        .card h3 {
-            color: #00d4ff;
-            font-size: 18px;
-            margin-bottom: 10px;
+
+        .input-group {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
         }
-        .card p {
-            color: #4a5a6a;
+
+        .input-group label {
             font-size: 13px;
-            margin-bottom: 14px;
-            line-height: 1.5;
+            color: #4a5a6a;
+            font-weight: 500;
         }
-        .card input, .card textarea, .card select {
+
+        .input-group input {
             width: 100%;
-            padding: 10px 14px;
-            background: rgba(13,21,32,0.8);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 10px;
+            padding: 14px 18px;
+            background: rgba(13, 21, 32, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
             color: #c8d6e5;
             font-family: 'Courier New', monospace;
-            font-size: 13px;
-            margin: 6px 0;
-        }
-        .card input:focus, .card textarea:focus {
-            border-color: #00d4ff;
+            font-size: 14px;
+            transition: 0.2s;
             outline: none;
         }
-        .card button {
+
+        .input-group input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+        }
+
+        .input-group input::placeholder {
+            color: #2a3a4a;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
             background: #00d4ff;
             color: #0a0e17;
             border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             font-family: 'Segoe UI', monospace;
-            font-size: 14px;
-            transition: 0.15s;
-            width: 100%;
-            margin-top: 8px;
+            transition: 0.2s;
         }
-        .card button:hover {
+
+        .btn:hover {
             background: #00b8d4;
             transform: scale(1.01);
         }
-        .card .output {
-            background: rgba(13,21,32,0.6);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 10px;
-            min-height: 50px;
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .output-area {
+            margin-top: 20px;
+            padding: 16px 18px;
+            background: rgba(13, 21, 32, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            min-height: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
             white-space: pre-wrap;
             word-break: break-all;
-            font-size: 12px;
+            line-height: 1.6;
             color: #c8d6e5;
-            max-height: 150px;
+            max-height: 200px;
             overflow-y: auto;
-            font-family: 'Courier New', monospace;
         }
-        .warning {
-            background: rgba(255,107,107,0.05);
-            border-left: 3px solid #ff6b6b;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 11px;
+
+        .output-area .success {
+            color: #00ff88;
+        }
+
+        .output-area .error {
             color: #ff6b6b;
-            margin-bottom: 10px;
         }
-        .danger {
-            background: rgba(255,0,0,0.1);
-            border: 1px solid #ff000066;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: #ff4444;
-            margin-bottom: 10px;
-            font-weight: bold;
+
+        .output-area .info {
+            color: #4a5a6a;
         }
-        footer {
-            margin-top: 40px;
-            padding: 20px;
+
+        .footer {
+            margin-top: 24px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.03);
+            font-size: 11px;
             color: #2a3a4a;
-            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 16px;
         }
-        footer .disclaimer {
+
+        .footer .disclaimer {
             color: #ff6b6b;
             font-size: 11px;
-            margin-top: 8px;
-            border: 1px solid #ff6b6b22;
-            padding: 10px;
-            border-radius: 10px;
+            margin-top: 6px;
         }
-        @media (max-width: 600px) {
-            header h1 { font-size: 28px; }
-            .grid { grid-template-columns: 1fr; }
+
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 24px 16px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
-    <header>
-        <h1>🧬 inftools</h1>
-        <div class="sub">Web Security Suite — Tools no one expected.</div>
-        <div class="badge">⚠️ Vain luvalliseen käyttöön · Oma vastuu</div>
-    </header>
-
-    <div class="grid">
-
-        <!-- ============================================================
-        WEBSITE CHECKER
-        ============================================================ -->
-        <div class="card">
-            <h3>🌐 Website Checker</h3>
-            <p>Tarkista verkkosivun turvallisuus, SSL, ja saatavuus.</p>
-            <div class="warning">⚠️ Vain oman tai luvan saaneen sivun testaamiseen.</div>
-            <input id="checkUrl" placeholder="https://example.com" value="https://github.com">
-            <button onclick="websiteCheck()">🔍 Tarkista</button>
-            <div class="output" id="checkOutput">Valmis.</div>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 Bypass</h1>
+            <div class="sub">Linkvertise · Adfly · Shorte.st · ja muut</div>
+            <div class="badge">⚠️ Vain luvalliseen käyttöön · Oma vastuu</div>
         </div>
 
-        <!-- ============================================================
-        BYPASSER
-        ============================================================ -->
-        <div class="card">
-            <h3>🔓 Bypasser</h3>
-            <p>Testaa suojausmekanismeja (teoreettinen).</p>
-            <div class="danger">🚨 VAIN TESTIKÄYTTÖÖN — LAITON KÄYTTÖ ON RIKOS</div>
-            <div class="warning">⚠️ Tämä työkalu yrittää ohittaa suojauksia. Käytä vain omaa testiympäristöäsi.</div>
-            <input id="bypassUrl" placeholder="https://example.com/login" value="https://example.com">
-            <button onclick="bypassTest()">🔓 Testaa</button>
-            <div class="output" id="bypassOutput">Valmis.</div>
+        <div class="input-group">
+            <label for="linkInput">🔗 Liitä Linkvertise- tai muu lyhennetty linkki</label>
+            <input
+            id="linkInput"
+            type="url"
+            placeholder="https://linkvertise.com/..."
+            value="https://linkvertise.com/"
+            >
         </div>
 
-        <!-- ============================================================
-        HOSTING PROVIDER
-        ============================================================ -->
-        <div class="card">
-            <h3>📦 Hosting Provider</h3>
-            <p>Luo testisivu ja "hostaa" se simulaatiossa.</p>
-            <div class="warning">⚠️ Vain testikäyttöön. Ei oikeaa hostingia.</div>
-            <input id="hostingName" placeholder="Sivun nimi" value="TestiSivu">
-            <textarea id="hostingContent" rows="3" placeholder="HTML-sisältö..."><h1>🧬 Tervetuloa testisivulle!</h1></textarea>
-            <button onclick="hostPage()">📤 Hostaa</button>
-            <div class="output" id="hostingOutput">Valmis.</div>
+        <button class="btn" id="bypassBtn">⚡ Bypass</button>
+
+        <div class="output-area" id="output">
+            <span class="info">💡 Liitä linkki ja paina Bypass.</span>
         </div>
 
-        <!-- ============================================================
-        LINK GENERATOR
-        ============================================================ -->
-        <div class="card">
-            <h3>🔗 Link Generator</h3>
-            <p>Luo testilinkkejä eri tarkoituksiin.</p>
-            <div class="warning">⚠️ Vain testikäyttöön. Älä luo haitallisia linkkejä.</div>
-            <select id="linkType">
-                <option value="short">Lyhyt linkki</option>
-                <option value="tracked">Seurantalinkki</option>
-                <option value="redirect">Uudelleenohjaus</option>
-                <option value="phishing">Phishing-simulaatio (testi)</option>
-            </select>
-            <input id="linkTarget" placeholder="Kohde-URL" value="https://github.com/inftools">
-            <button onclick="generateLink()">🔗 Generoi</button>
-            <div class="output" id="linkOutput">Valmis.</div>
+        <div class="footer">
+            <div>⚡ <a href="#" target="_blank">inftools</a> · Bypass Suite</div>
+            <div class="disclaimer">
+                ⚠️ Vain koulutus- ja testikäyttöön. Tekijä ei ole vastuussa väärinkäytöistä.
+            </div>
         </div>
-
-        <!-- ============================================================
-        LINK VIRUS CHECK
-        ============================================================ -->
-        <div class="card">
-            <h3>🛡️ Link Virus Check</h3>
-            <p>Tarkista onko linkki turvallinen (simuloitu).</p>
-            <div class="warning">⚠️ Tämä on simuloitu tarkistus. Älä luota siihen täysin.</div>
-            <input id="virusCheckUrl" placeholder="https://example.com" value="https://github.com">
-            <button onclick="virusCheck()">🔍 Tarkista</button>
-            <div class="output" id="virusOutput">Valmis.</div>
-        </div>
-
     </div>
 
-    <footer>
-        <div>🧬 inftools — Web Security Suite</div>
-        <div class="disclaimer">
-            ⚠️ Vain luvalliseen tietoturvatutkimukseen ja koulutukseen.<br>
-            Käyttäjä on yksin vastuussa. Tekijä ei ole vastuussa väärinkäytöistä.
-        </div>
-    </footer>
+    <script>
+        (function() {
+            'use strict';
 
-</div>
+            const input = document.getElementById('linkInput');
+            const btn = document.getElementById('bypassBtn');
+            const output = document.getElementById('output');
 
-<script>
-    // ============================================================
-    // 1. WEBSITE CHECKER (AITO)
-    // ============================================================
-    window.websiteCheck = async function() {
-        const url = document.getElementById('checkUrl').value.trim();
-        const out = document.getElementById('checkOutput');
-        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
-        out.textContent = '⏳ Tarkistetaan...';
-        try {
-            const start = Date.now();
-            const resp = await fetch(url, { method: 'HEAD' });
-            const time = Date.now() - start;
-            let security = '⚠️ Tuntematon';
-            if (url.startsWith('https')) security = '✅ SSL (HTTPS)';
-            else if (url.startsWith('http')) security = '❌ Ei SSL (HTTP)';
-            out.textContent = `✅ ${resp.status} ${resp.statusText}\n⏱️ ${time}ms\n🔒 ${security}\n🌐 ${url}`;
-        } catch (e) {
-            out.textContent = `❌ Virhe: ${e.message}`;
-        }
-    };
+            // API-rajapinta (sama kuin bypass.vip): https://api.bypass.vip/
+            const API_URL = 'https://api.bypass.vip/';
 
-    // ============================================================
-    // 2. BYPASSER (TEOREETTINEN)
-    // ============================================================
-    window.bypassTest = function() {
-        const url = document.getElementById('bypassUrl').value.trim();
-        const out = document.getElementById('bypassOutput');
-        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
-        out.textContent = `🔓 Teoreettinen bypass testi:\n${url}\n\nTämä on opetusmateriaalia. Oikea bypass vaatii syvempää analyysiä.`;
-    };
+            function setOutput(text, type) {
+                const className = type || 'info';
+                output.innerHTML = `<span class="${className}">${escapeHtml(text)}</span>`;
+            }
 
-    // ============================================================
-    // 3. HOSTING PROVIDER (SIMULOITU)
-    // ============================================================
-    window.hostPage = function() {
-        const name = document.getElementById('hostingName').value.trim() || 'sivu';
-        const content = document.getElementById('hostingContent').value.trim() || '<h1>🧬 Testisivu</h1>';
-        const out = document.getElementById('hostingOutput');
-        const url = `data:text/html;charset=utf-8,${encodeURIComponent(content)}`;
-        out.textContent = `📦 Sivu "${name}" hostattu!\n🔗 URL: ${url}\n\n✅ Klikkaa linkkiä avataksesi sivun.`;
-        // Avaa sivu uudessa välilehdessä
-        const a = document.createElement('a');
-        a.href = url;
-        a.target = '_blank';
-        a.click();
-    };
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
 
-    // ============================================================
-    // 4. LINK GENERATOR (AITO)
-    // ============================================================
-    window.generateLink = function() {
-        const type = document.getElementById('linkType').value;
-        const target = document.getElementById('linkTarget').value.trim() || 'https://example.com';
-        const out = document.getElementById('linkOutput');
-        let link = '';
-        let desc = '';
-        switch(type) {
-            case 'short':
-                link = `https://short.link/${Math.random().toString(36).substring(2, 8)}`;
-                desc = 'Lyhyt linkki (simuloitu)';
-                break;
-            case 'tracked':
-                link = `https://track.me/${Math.random().toString(36).substring(2, 8)}?ref=test&id=${Date.now()}`;
-                desc = 'Seurantalinkki (simuloitu)';
-                break;
-            case 'redirect':
-                link = `https://redirect.me/${Math.random().toString(36).substring(2, 8)}?to=${encodeURIComponent(target)}`;
-                desc = 'Uudelleenohjaus (simuloitu)';
-                break;
-            case 'phishing':
-                link = `https://login-secure.com/${Math.random().toString(36).substring(2, 8)}?redirect=${encodeURIComponent(target)}`;
-                desc = '⚠️ Phishing-simulaatio (vain testi)';
-                break;
-            default:
-                link = target;
-                desc = 'Oletus';
-        }
-        out.textContent = `🔗 ${desc}\n${link}\n\n⚠️ Vain testikäyttöön.`;
-    };
+            async function bypassLink(url) {
+                if (!url || !url.trim()) {
+                    setOutput('❌ Anna linkki.', 'error');
+                    return;
+                }
 
-    // ============================================================
-    // 5. LINK VIRUS CHECK (SIMULOITU)
-    // ============================================================
-    window.virusCheck = function() {
-        const url = document.getElementById('virusCheckUrl').value.trim();
-        const out = document.getElementById('virusOutput');
-        if (!url) { out.textContent = '⚠️ Anna URL.'; return; }
-        // Simuloi tarkistus
-        const safe = Math.random() > 0.2;
-        const threats = ['Phishing', 'Malware', 'Spam', 'Fake', 'Redirect'];
-        const threat = threats[Math.floor(Math.random() * threats.length)];
-        if (safe) {
-            out.textContent = `✅ ${url} on turvallinen.\n📊 Ei havaittu uhkia.`;
-        } else {
-            out.textContent = `⚠️ ${url} voi olla vaarallinen!\n🚨 Havaittu: ${threat}\n\n⚠️ Tämä on simuloitu tarkistus.`;
-        }
-    };
+                const cleanUrl = url.trim();
 
-    console.log('🧬 inftools — Web Security Suite loaded.');
-</script>
+                // Yksinkertainen validointi
+                if (!cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+                    setOutput('❌ Virheellinen URL. Aloita http:// tai https://', 'error');
+                    return;
+                }
+
+                setOutput('⏳ Bypass käynnissä...', 'info');
+                btn.disabled = true;
+
+                try {
+                    const payload = new URLSearchParams();
+                    payload.append('url', cleanUrl);
+
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: payload.toString(),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+
+                    // bypass.vip API palauttaa destination-kentän
+                    if (data && data.destination) {
+                        setOutput(
+                            `✅ Bypass onnistui!\n\n🔗 Alkuperäinen: ${cleanUrl}\n🎯 Kohde: ${data.destination}`,
+                            'success'
+                        );
+                    } else if (data && data.error) {
+                        setOutput(`❌ Virhe: ${data.error}`, 'error');
+                    } else {
+                        // Yritetään tulkita data sellaisenaan
+                        const jsonStr = JSON.stringify(data, null, 2);
+                        if (jsonStr && jsonStr.length > 2) {
+                            setOutput(`⚠️ Tuntematon vastaus:\n${jsonStr}`, 'error');
+                        } else {
+                            setOutput('❌ Bypass epäonnistui. Tarkista linkki.', 'error');
+                        }
+                    }
+                } catch (error) {
+                    setOutput(`❌ Virhe: ${error.message}`, 'error');
+                } finally {
+                    btn.disabled = false;
+                }
+            }
+
+            // Tapahtumakuuntelijat
+            btn.addEventListener('click', function() {
+                bypassLink(input.value);
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    bypassLink(input.value);
+                }
+            });
+
+            // Alustus: jos kentässä on jotain, sitä ei ajeta automaattisesti
+            setOutput('💡 Liitä linkki ja paina Bypass.', 'info');
+        })();
+    </script>
 
 </body>
 </html>
